@@ -35,15 +35,7 @@
       enabled: yes
 
   - name: Create a new database with name “accounts”
-    community.mysql.mysql_db:
+    mysql_db:
       name: accounts
-      state: present
-      login_unix_socket: /var/lib/mysql/mysql.sock
-
-  - name: Create database user
-    community.mysql.mysql_user:
-      name: psa
-      password: '123456'
-      priv: '*.*:ALL'
       state: present
       login_unix_socket: /var/lib/mysql/mysql.sock

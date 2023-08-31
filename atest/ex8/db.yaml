@@ -17,7 +17,17 @@
 - name: dbservers start up
   hosts: dbservers
   become: yes
+ # vars:
+ #  dbname: Electric
+ #  dbuser: current
+ #  dbpass: tesla
   tasks:
+  - debug:
+      msg: "The db name is {{dbname}}"
+
+  - debug:
+      var: dbname
+
   - name: Install maria-db server
     ansible.builtin.yum:
       name: mariadb-server
@@ -47,3 +57,10 @@
       priv: '*.*:ALL'
       state: present
       login_unix_socket: /var/lib/mysql/mysql.sock
+
+    register: dboutput
+
+
+  - name: Print variable output
+    debug:
+      var: "{{dboutput}}"
